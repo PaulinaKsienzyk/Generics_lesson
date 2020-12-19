@@ -22,5 +22,9 @@ public class Range {
         return bottomBound;
     }
 
+    public boolean contains(int value) {
+        return value >= bottomBound && value <= upperBound;
+    }
+
 
 }
