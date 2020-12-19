@@ -5,9 +5,21 @@ public class Range {
     int bottomBound;
     int upperBound;
 
-    public Range(int bottomBound, int upperBound) {
-        this.bottomBound = bottomBound;
-        this.upperBound = upperBound;
+    private Range(int i, int j) {
+        bottomBound = i;
+        upperBound = j;
+    }
+
+    public static Range between(int fromInclusive, int toInclusive) {
+        return new Range(fromInclusive, toInclusive);
+    }
+
+    public int getMax() {
+        return upperBound;
+    }
+
+    public int getMin() {
+        return bottomBound;
     }
 
 
