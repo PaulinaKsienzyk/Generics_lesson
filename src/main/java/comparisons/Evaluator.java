@@ -1,35 +1,47 @@
 package comparisons;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class Evaluator {
 
-    private final int totalNrOfPoints;
-    private final Map<Character, Range> marks;
+    private List<PreAcademyStudent> students;
 
-    public Evaluator(int totalNrOfPoints) {
-        this.totalNrOfPoints = totalNrOfPoints;
-
-        marks = new HashMap<>();
-        marks.put('A', Range.between(90, 100));
-        marks.put('B', Range.between(80, 89));
-        marks.put('C', Range.between(70, 79));
-        marks.put('D', Range.between(60, 69));
-        marks.put('E', Range.between(0, 59));
+    public Evaluator(List<PreAcademyStudent> students) {
+        this.students = students;
     }
 
-    private int convertToPercentages(int points) {
-        return (points * 100) / totalNrOfPoints;
+    // sort using Comparable
+    private List<PreAcademyStudent> sortUsingTotalPoints() {
+        List<PreAcademyStudent> sortList = new ArrayList<>(students);
+        sortList.sort(Collections.reverseOrder());
+        return sortList;
     }
 
-    public char evaluateGrade(int points) {
-        int inPercentages = convertToPercentages(points);
-        return marks.entrySet()
-                .stream()
-                .filter(r -> r.getValue().contains(points))
-                .map(Map.Entry::getKey)
-                .findAny()
-                .orElse('E');
+    // sort using Comparator
+    private List<PreAcademyStudent> sortUsingNaturalOrderings() {
+        List<PreAcademyStudent> sortList = new ArrayList<>(students);
+        sortList.sort(Comparator.comparing(PreAcademyStudent::getTasksPoints)
+                .thenComparing(PreAcademyStudent::getQuizzesPoints)
+                .thenComparing(PreAcademyStudent::getLectureActivity));
+        return sortList;
     }
+
+    public static void main(String[] args) {
+        List<PreAcademyStudent> students = new ArrayList<>();
+        PreAcademyStudent s1 = new PreAcademyStudent(5, 10, 15);
+        PreAcademyStudent s2 = new PreAcademyStudent(17, 10, 7);
+        PreAcademyStudent s3 = new PreAcademyStudent(5, 20, 3);
+        students.add(s1);
+        students.add(s2);
+        students.add(s3);
+
+        Evaluator evaluator = new Evaluator(students);
+        System.out.println(evaluator.sortUsingTotalPoints());
+        System.out.println(evaluator.sortUsingNaturalOrderings());
+    }
+
+
 }
