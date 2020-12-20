@@ -1,4 +1,4 @@
-package comparisons;
+package comparisons.PreAcademy;
 
 public class PreAcademyStudent implements Comparable<PreAcademyStudent>{
 

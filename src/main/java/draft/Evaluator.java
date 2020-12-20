@@ -1,7 +1,5 @@
 package draft;
 
-import comparisons.Range;
-
 import java.util.HashMap;
 import java.util.Map;
 
