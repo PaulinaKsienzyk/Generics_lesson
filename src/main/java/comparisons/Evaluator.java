@@ -20,7 +20,7 @@ public class Evaluator {
         return sortList;
     }
 
-    // sort using Comparator
+    // sort using Comparators
     private List<PreAcademyStudent> sortUsingNaturalOrderings() {
         List<PreAcademyStudent> sortList = new ArrayList<>(students);
         sortList.sort(Comparator.comparing(PreAcademyStudent::getTasksPoints)
