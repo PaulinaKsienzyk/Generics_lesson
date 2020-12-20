@@ -17,58 +17,71 @@ public class StudentsBinder {
     public StudentsBinder(String CVS_PATH, SortType sortType) {
         this.CVS_PATH = CVS_PATH;
         this.sortType = sortType;
+        students = CVSReader.read(CVS_PATH);
     }
 
-    public List<PreAcademyStudent> sort() {
+    public void sort() {
+        List<PreAcademyStudent> sortedStudents = new ArrayList<>();
         switch (sortType) {
             case TOTAL_DESC:
-                return sortTotalInDesc();
+                sortTotalInDesc();
             case TOTAL_ASC:
-                return sortTotalInAsc();
+                sortTotalInAsc();
             case TASKS_DESC:
-                return sort(PreAcademyStudent::getTasksPoints, true);
+                sort(PreAcademyStudent::getTasksPoints, true);
             case TASKS_ASC:
-                return sort(PreAcademyStudent::getTasksPoints, false);
+                sort(PreAcademyStudent::getTasksPoints, false);
             case QUIZZES_DESC:
-                return sort(PreAcademyStudent::getQuizzesPoints, true);
+                sort(PreAcademyStudent::getQuizzesPoints, true);
             case QUIZZES_ASC:
-                return sort(PreAcademyStudent::getQuizzesPoints, false);
+                sort(PreAcademyStudent::getQuizzesPoints, false);
             case ACTIVITY_DESC:
-                return sort(PreAcademyStudent::getLectureActivity, true);
+                sort(PreAcademyStudent::getLectureActivity, true);
             case ACTIVITY_ASC:
-                return sort(PreAcademyStudent::getLectureActivity, false);
+                sort(PreAcademyStudent::getLectureActivity, false);
         }
-        return students;
     }
 
     // sort using Comparable
-    private List<PreAcademyStudent> sortTotalInDesc() {
+    private void sortTotalInDesc() {
         students.sort(Collections.reverseOrder());
-        return students;
     }
 
-    private List<PreAcademyStudent> sortTotalInAsc() {
+    private void sortTotalInAsc() {
         Collections.sort(students);
-        return students;
     }
 
 
     // sort using Comparators
-    private List<PreAcademyStudent> sort(Function<PreAcademyStudent, Integer> fieldToSortBy, boolean inDescOrder) {
+    private void sort(Function<PreAcademyStudent, Integer> fieldToSortBy, boolean inDescOrder) {
         if (inDescOrder) {
             students.sort(Comparator.comparing(fieldToSortBy));
         } else {
             students.sort(Comparator.comparing(fieldToSortBy).reversed());
         }
-        return students;
+    }
+    
+    public List<String[]> convertToDataArray() {
+        List<String[]> data = new ArrayList<>();
+        for (var student : students) {
+            String[] studentData = new String[4];
+            studentData[0] = student.getName();
+            studentData[1] = String.valueOf(student.getQuizzesPoints());
+            studentData[2] = String.valueOf(student.getTasksPoints());
+            studentData[3] = String.valueOf(student.getLectureActivity());
+            data.add(studentData);
+        }
+        return data;
     }
 
     public static void main(String[] args) {
 
         StudentsBinder studentsBinder = new StudentsBinder("preAcademyStudents.csv", TOTAL_DESC);
+        studentsBinder.sort();
 
         try (CVSWriter cvsWriter = new CVSWriter()) {
-//            cvsWriter.givenDataArray_whenConvertToCSV_thenOutputCreated();
+            cvsWriter.givenDataArray_whenConvertToCSV_thenOutputCreated(studentsBinder.convertToDataArray(),
+                    "sortedStudents.csv");
         }catch (Exception e) {
             System.out.println("Something goes wrong...");
         }
