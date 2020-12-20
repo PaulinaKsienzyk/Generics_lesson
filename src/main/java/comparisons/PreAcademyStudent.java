@@ -23,7 +23,7 @@ public class PreAcademyStudent implements Comparable<PreAcademyStudent>{
 
     @Override
     public String toString() {
-        return String.valueOf(this.totalPoints);
+        return this.name + "-" + String.valueOf(this.totalPoints);
     }
 
     public int getQuizzesPoints() {
