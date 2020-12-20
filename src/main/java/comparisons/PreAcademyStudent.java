@@ -1,45 +1,44 @@
 package comparisons;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 public class PreAcademyStudent implements Comparable<PreAcademyStudent>{
 
-    int points;
+    private final String name;
+    private final int totalPoints;
+    private final int quizzesPoints;
+    private final int tasksPoints;
+    private final int lectureActivity;
 
-    public PreAcademyStudent(int points) {
-        this.points = points;
+    public PreAcademyStudent(String name, int quizzesPoints, int tasksPoints, int lectureActivity) {
+        this.name = name;
+        this.quizzesPoints = quizzesPoints;
+        this.tasksPoints = tasksPoints;
+        this.lectureActivity = lectureActivity;
+        totalPoints = this.quizzesPoints + this.tasksPoints + this.lectureActivity;
     }
 
     @Override
     public int compareTo(PreAcademyStudent preAcademyStudent) {
-        return Integer.compare(this.points, preAcademyStudent.points);
+        return Integer.compare(this.totalPoints, preAcademyStudent.totalPoints);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(this.points);
+        return String.valueOf(this.totalPoints);
+    }
+
+    public int getQuizzesPoints() {
+        return quizzesPoints;
+    }
+
+    public int getTasksPoints() {
+        return tasksPoints;
+    }
+
+    public int getLectureActivity() {
+        return lectureActivity;
     }
 
     public static void main(String[] args) {
-        PreAcademyStudent s10 = new PreAcademyStudent(10);
-        PreAcademyStudent s5 = new PreAcademyStudent(5);
-        PreAcademyStudent s15 = new PreAcademyStudent(15);
-
-        List<PreAcademyStudent> students = new ArrayList<>();
-        students.add(s10);
-        students.add(s5);
-        students.add(s15);
-
-        Collections.sort(students, Comparator.reverseOrder());
-        System.out.println(students);
-
-        System.out.println(s5.compareTo(s10));
-        System.out.println(s15.compareTo(s5));
-        System.out.println(s10.compareTo(s10));
-
 
     }
 }
