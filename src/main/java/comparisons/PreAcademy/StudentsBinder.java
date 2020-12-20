@@ -5,12 +5,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Evaluator {
+public class StudentsBinder {
 
     private List<PreAcademyStudent> students;
+    private final String CVS_PATH;
+    private final SortType sortType;
 
-    public Evaluator(List<PreAcademyStudent> students) {
-        this.students = students;
+    public StudentsBinder(String CVS_PATH, SortType sortType) {
+        this.CVS_PATH = CVS_PATH;
+        this.sortType = sortType;
     }
 
     // sort using Comparable
@@ -31,17 +34,10 @@ public class Evaluator {
     }
 
     public static void main(String[] args) {
-        List<PreAcademyStudent> students = new ArrayList<>();
-        PreAcademyStudent s1 = new PreAcademyStudent("Paulina Ksienzyk", 5, 10, 15);
-        PreAcademyStudent s2 = new PreAcademyStudent("Rafał Mazurek", 17, 10, 7);
-        PreAcademyStudent s3 = new PreAcademyStudent("Anna Ignacy" , 5, 20, 3);
-        students.add(s1);
-        students.add(s2);
-        students.add(s3);
 
-        Evaluator evaluator = new Evaluator(students);
-        System.out.println(evaluator.sortUsingTotalPoints());
-        System.out.println(evaluator.sortUsingNaturalOrderings());
+        StudentsBinder studentsBinder = new StudentsBinder("preAcademyStudents.csv", SortType.TOTAL_DESC);
+        System.out.println(studentsBinder.sortUsingTotalPoints());
+        System.out.println(studentsBinder.sortUsingNaturalOrderings());
     }
 
 
