@@ -25,15 +25,16 @@ public class Evaluator {
         List<PreAcademyStudent> sortList = new ArrayList<>(students);
         sortList.sort(Comparator.comparing(PreAcademyStudent::getTasksPoints)
                 .thenComparing(PreAcademyStudent::getQuizzesPoints)
-                .thenComparing(PreAcademyStudent::getLectureActivity));
+                .thenComparing(PreAcademyStudent::getLectureActivity)
+                .reversed());
         return sortList;
     }
 
     public static void main(String[] args) {
         List<PreAcademyStudent> students = new ArrayList<>();
-        PreAcademyStudent s1 = new PreAcademyStudent(5, 10, 15);
-        PreAcademyStudent s2 = new PreAcademyStudent(17, 10, 7);
-        PreAcademyStudent s3 = new PreAcademyStudent(5, 20, 3);
+        PreAcademyStudent s1 = new PreAcademyStudent("Paulina K.", 5, 10, 15);
+        PreAcademyStudent s2 = new PreAcademyStudent("Rafał M.", 17, 10, 7);
+        PreAcademyStudent s3 = new PreAcademyStudent("Anna I." , 5, 20, 3);
         students.add(s1);
         students.add(s2);
         students.add(s3);
