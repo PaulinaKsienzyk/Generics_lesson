@@ -38,6 +38,10 @@ public class PreAcademyStudent implements Comparable<PreAcademyStudent>{
         return lectureActivity;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public static void main(String[] args) {
 
     }
