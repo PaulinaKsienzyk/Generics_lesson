@@ -32,9 +32,9 @@ public class Evaluator {
 
     public static void main(String[] args) {
         List<PreAcademyStudent> students = new ArrayList<>();
-        PreAcademyStudent s1 = new PreAcademyStudent("Paulina K.", 5, 10, 15);
-        PreAcademyStudent s2 = new PreAcademyStudent("Rafał M.", 17, 10, 7);
-        PreAcademyStudent s3 = new PreAcademyStudent("Anna I." , 5, 20, 3);
+        PreAcademyStudent s1 = new PreAcademyStudent("Paulina Ksienzyk", 5, 10, 15);
+        PreAcademyStudent s2 = new PreAcademyStudent("Rafał Mazurek", 17, 10, 7);
+        PreAcademyStudent s3 = new PreAcademyStudent("Anna Ignacy" , 5, 20, 3);
         students.add(s1);
         students.add(s2);
         students.add(s3);
