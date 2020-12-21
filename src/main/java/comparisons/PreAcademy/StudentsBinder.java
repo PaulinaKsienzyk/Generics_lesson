@@ -19,26 +19,33 @@ public class StudentsBinder {
         this.sortType = sortType;
         students = CVSReader.read(CVS_PATH);
     }
-
+    
     public void sort() {
-        List<PreAcademyStudent> sortedStudents = new ArrayList<>();
         switch (sortType) {
             case TOTAL_DESC:
                 sortTotalInDesc();
+                break;
             case TOTAL_ASC:
                 sortTotalInAsc();
+                break;
             case TASKS_DESC:
                 sort(PreAcademyStudent::getTasksPoints, true);
+                break;
             case TASKS_ASC:
                 sort(PreAcademyStudent::getTasksPoints, false);
+                break;
             case QUIZZES_DESC:
                 sort(PreAcademyStudent::getQuizzesPoints, true);
+                break;
             case QUIZZES_ASC:
                 sort(PreAcademyStudent::getQuizzesPoints, false);
+                break;
             case ACTIVITY_DESC:
                 sort(PreAcademyStudent::getLectureActivity, true);
+                break;
             case ACTIVITY_ASC:
                 sort(PreAcademyStudent::getLectureActivity, false);
+                break;
         }
     }
 
@@ -76,7 +83,7 @@ public class StudentsBinder {
 
     public static void main(String[] args) {
 
-        StudentsBinder studentsBinder = new StudentsBinder("preAcademyStudents.csv", TOTAL_DESC);
+        StudentsBinder studentsBinder = new StudentsBinder("preAcademyStudents.csv", TOTAL_ASC);
         studentsBinder.sort();
 
         try (CVSWriter cvsWriter = new CVSWriter()) {
